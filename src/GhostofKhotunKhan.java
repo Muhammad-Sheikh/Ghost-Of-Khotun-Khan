@@ -1,14 +1,17 @@
-import hsa.Console;
+
+
+import java.util.Scanner;
+
 //Text Based Adventure game set in Mongolia Post Japanese Invasion
 //Ghost Of Khotun Khan Version: 1.2
 //By: Muhammad Sheikh & Hassan Abassi
 //Summative for ICS201-7C
 //Date: 2022/06/15
 public class GhostofKhotunKhan {
-    static Console c;
+
 
     public static void main(String[] args) {
-        c = new Console();
+
 
         //Object Declaration
         GhostofKhotunKhan main = new GhostofKhotunKhan();
@@ -238,7 +241,6 @@ public class GhostofKhotunKhan {
     //asks user to input a key
     public void contunieChar() {
         System.out.println("Press Any Key to Continue!");
-        dummy = c.readChar();
     }
     //Ran at the end of the game to print  credits and score of the player
     public void gameFinished() {
@@ -384,7 +386,8 @@ public class GhostofKhotunKhan {
         System.out.println("START");
         System.out.println("CREDITS");
         System.out.println("EXIT");
-        playerStart = c.readString();
+        Scanner input = new Scanner(System.in);
+        playerStart = input.nextLine();
         System.out.println(playerStart);
         if (playerStart.equals("START") || playerStart.equals("start") || playerStart.equals("Start")) {
             return gameStart = true;
@@ -419,7 +422,8 @@ public class GhostofKhotunKhan {
         System.out.println("Current Defense: " + player.getDef());
         System.out.println("Current Level: " + player.getLevel());
         System.out.println("What will you do? Enter 1 to Attack, 2 to Defend, 3 to see special moves!\n");
-        playerInput = c.readInt();
+        Scanner CombatInput = new Scanner(System.in);
+        playerInput = CombatInput.nextInt();
     }
 
     //Prints out one of 5 encounter messages. These messages dictate who the player will fight.
