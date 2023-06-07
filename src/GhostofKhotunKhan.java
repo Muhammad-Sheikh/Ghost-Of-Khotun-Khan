@@ -7,7 +7,7 @@ import java.util.Scanner;
 //By: Muhammad Sheikh & Hassan Abassi
 //Summative for ICS201-7C
 //Date: 2022/06/15
-public class GhostofKhotunKhan {
+public class GhostofKhotunKhan{
 
 
     public static void main(String[] args) {
