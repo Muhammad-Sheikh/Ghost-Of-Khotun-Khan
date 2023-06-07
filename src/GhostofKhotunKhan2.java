@@ -220,11 +220,10 @@ public class GhostofKhotunKhan2 {
             //END GAME, OUTPUT
             main.gameFinished();
          */
-        world2.generateAttributeTable();
-        String localAttributeTable[] = (world2.getAttributeTable()).clone();
 
-        double value = Double.parseDouble(localAttributeTable[2]);
-        value++;
+        world2.setValidPool();
+        world2.newShop();
+
 
 
 
