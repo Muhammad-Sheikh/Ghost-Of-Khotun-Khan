@@ -7,14 +7,14 @@ import java.util.Scanner;
 //By: Muhammad Sheikh & Hassan Abassi
 //Summative for ICS201-7C
 //Date: 2022/06/15
-public class GhostofKhotunKhan{
+public class GhostofKhotunKhan2{
 
 
     public static void main(String[] args) {
 
 
         //Object Declaration
-        GhostofKhotunKhan main = new GhostofKhotunKhan();
+        GhostofKhotunKhan2 main = new GhostofKhotunKhan2();
         //Calls title screen
         main.titleScreen();
         while (main.gameStart) {
