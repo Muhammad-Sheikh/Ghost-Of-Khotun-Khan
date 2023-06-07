@@ -1,20 +1,32 @@
+/*
+TODO
+-Add rest of the attirbute tables and random way to find them
+-Add shop interaction
+-Add random encounter + world generation
+-Add upgraded leveling system
+-Add generic encounters
+-Add more abilties
+-Add coloured text where needed
+ */
 
-
-import java.util.Scanner;
+import java.util.*;
 
 //Text Based Adventure game set in Mongolia Post Japanese Invasion
 //Ghost Of Khotun Khan Version: 1.2
 //By: Muhammad Sheikh & Hassan Abassi
 //Summative for ICS201-7C
 //Date: 2022/06/15
-public class GhostofKhotunKhan {
+public class GhostofKhotunKhan2 {
 
 
     public static void main(String[] args) {
 
 
         //Object Declaration
-        GhostofKhotunKhan main = new GhostofKhotunKhan();
+        GhostofKhotunKhan2 main = new GhostofKhotunKhan2();
+        worldGeneration world2 = new worldGeneration();
+
+        /*
         //Calls title screen
         main.titleScreen();
         while (main.gameStart) {
@@ -207,13 +219,27 @@ public class GhostofKhotunKhan {
 
             //END GAME, OUTPUT
             main.gameFinished();
+         */
+        world2.generateAttributeTable();
+        String localAttributeTable[] = (world2.getAttributeTable()).clone();
+
+        double value = Double.parseDouble(localAttributeTable[2]);
+        value++;
+
+
+
         }
-    }
+
 
     Player player = new Player();
     Enemy enemy = new Enemy();
 
-    //main variable setup
+    worldGeneration world = new worldGeneration();
+
+
+
+
+        //main variable setup
     int playerInput;
     char dummy;
     boolean gameStart, finalBoss;
@@ -318,69 +344,48 @@ public class GhostofKhotunKhan {
                 "                         {]");
         System.out.println();
         System.out.println();
-        System.out.println("                                                  \n" +
-                "                          .*:                     \n" +
-                "                         -%%@#                    \n" +
-                "                         #@@@%                    \n" +
-                "                         %@@%%.                   \n" +
-                "                        *@@@@%*                   \n" +
-                "                       ==%@@%**+                  \n" +
-                "               -.     #*+@%@*@##                  \n" +
-                "              +@@%#%*@@*+%@*@%%%                  \n" +
-                "                =%%%%%%%%@%%@%%%                  \n" +
-                "                 *#%####%@@%%%@%+                 \n" +
-                "                  .###.#@@%@#@@%@ %@@=            \n" +
-                "                  %#*+##@%#%*%%@*%@@@@@+          \n" +
-                "                     ##@@%#%%%%@%@%#@@@#*         \n" +
-                "                 :#-=*#@*%%#%%@%@%*@%#@@%*        \n" +
-                "                 -%@@#+@@@%%@@@%@@%%=@#%@@*       \n" +
-                "                *=%%@%#@@%@*%#@%%@#=%*%%%@@:       $$$$$$\\  $$\\                             $$\\                      $$$$$$\\        $$\\   $$\\ $$\\                   $$\\                               $$\\   $$\\ $$\\                           \n" +
-                "                *%%%%@@@@%#*%%%@%%#@+%#@#%@+%     $$  __$$\\ $$ |                            $$ |                    $$  __$$\\       $$ | $$  |$$ |                  $$ |                              $$ | $$  |$$ |                          \n" +
-                "                +#@%%@@@*%%#%@@%@=%#+*%#*=*%=%    $$ /  \\__|$$$$$$$\\   $$$$$$\\   $$$$$$$\\ $$$$$$\\          $$$$$$\\  $$ /  \\__|      $$ |$$  / $$$$$$$\\   $$$$$$\\  $$$$$$\\   $$\\   $$\\ $$$$$$$\\        $$ |$$  / $$$$$$$\\   $$$$$$\\  $$$$$$$\\  \n" +
-                "               -%@%%@%%@@%@###@##@%#+%@%##+*%     $$ |$$$$\\ $$  __$$\\ $$  __$$\\ $$  _____|\\_$$  _|        $$  __$$\\ $$$$\\           $$$$$  /  $$  __$$\\ $$  __$$\\ \\_$$  _|  $$ |  $$ |$$  __$$\\       $$$$$  /  $$  __$$\\  \\____$$\\ $$  __$$\\ \n" +
-                "               :#@%@@#@%%###==+*%##*@@@%#@*=      $$ |\\_$$ |$$ |  $$ |$$ /  $$ |\\$$$$$$\\    $$ |          $$ /  $$ |$$  _|          $$  $$<   $$ |  $$ |$$ /  $$ |  $$ |    $$ |  $$ |$$ |  $$ |      $$  $$<   $$ |  $$ | $$$$$$$ |$$ |  $$ |\n" +
-                "               -%%%@%+%%=%=@*%#*%#*%@@%@%%#+:     $$ |  $$ |$$ |  $$ |$$ |  $$ | \\____$$\\   $$ |$$\\       $$ |  $$ |$$ |            $$ |\\$$\\  $$ |  $$ |$$ |  $$ |  $$ |$$\\ $$ |  $$ |$$ |  $$ |      $$ |\\$$\\  $$ |  $$ |$$  __$$ |$$ |  $$ |\n" +
-                "              :*%@@@%%%%%#*==#*%%%%%@@@#%%%%%     \\$$$$$$  |$$ |  $$ |\\$$$$$$  |$$$$$$$  |  \\$$$$  |      \\$$$$$$  |$$ |            $$ | \\$$\\ $$ |  $$ |\\$$$$$$  |  \\$$$$  |\\$$$$$$  |$$ |  $$ |      $$ | \\$$\\ $$ |  $$ |\\$$$$$$$ |$$ |  $$ |\n" +
-                "              =#+#@@%=+%%%%@@@@@%%#@@@@%%@%%%      \\______/ \\__|  \\__| \\______/ \\_______/    \\____/        \\______/ \\__|            \\__|  \\__|\\__|  \\__| \\______/    \\____/  \\______/ \\__|  \\__|      \\__|  \\__|\\__|  \\__| \\_______|\\__|  \\__|\t\t\n" +
-                "              =+*@@@@+%%%%%@%%@@%%@%@@@@%@@%#:    \n" +
-                "               %%%@@@@%%%%%@@@@%@#%%@@%@@@%%%%    \n" +
-                "              .#%%@@@##%%%%%%%@%@@%@%#@@%%@%#*#   \n" +
-                "              *#%@@@@+#%%@@%%@@%%%%%@*@@%%@%%*##  \n" +
-                "             +%@@@@@+.%%%%@%@@@%@%@%@#%-#%%@@*##  \n" +
-                "            *+%%@@@#  ##%%%%%%%%@%%@%#  .#%@%#++  \n" +
-                "            %%%%@@@  .%%%%@@%%@@#@%@%*   %@@##+*  \n" +
-                "           .%%@@@@@  #%#%%@@@%@@@@%@@#.  %%%%+=#: \n" +
-                "           %%%@@@@.  .#%@@%@@@@@@@@@@*#:  ##@#+++ \n" +
-                "           %%@@@@@.   #%%@@@@@@@@%=%%@@%. -%@**## \n" +
-                "          %%@%@@@%   *%@@%@@@@%@@@@@%%@%#. %@-**% \n" +
-                "          #%%@@%@@  .+%%%#@@@#=:%%%#%%#@@# :@%%#@ \n" +
-                "          %%@@@@-=  =%%#@@@%@@%#%@@@@%%*@*#.@@@#* \n" +
-                "         .@%@@@% - .-#%%@@%@@%%@@@@@@@%+-@**@@#%% \n" +
-                "         #%@@@..   ==+%%@@@@@@%%@@@@@@@*.:@%@%%#%=\n" +
-                "         @@@@%      %#@@%#%@@@@@@@@%%@@@  :@@@@#*-\n" +
-                "        ##@@@#    .*+%%@@%#%%@%%@@@%@@@%   @%%@@%=\n" +
-                "        #%@%@#   *%-+%%@@%@@@@@@@@@@@%%#   *@@@@@+\n" +
-                "       #%#%@@*   +  +@%@@@@%@%%%%@%#@@%%.   %@@@%@\n" +
-                "       #%%@%:.     .%%@@@@@%%@%%%%%%@%#%*   ..@@@@\n" +
-                "      %%%@*#:-     -@%@@@%%@@%@@@@@#@#%*%        @\n" +
-                "       *%%  ..    **%%%@@@@%@%%###%@@@###         \n" +
-                "       @@@+      +*%@@@@@@@#@*%%##%#@%%*#         \n" +
-                "      +@% .     +#=@*@@@@@@@%%###@%%@@%%%-        \n" +
-                "      %@       #%#**@@@@%%@@@@%###*#@%@%%+        \n" +
-                "     =@=     .*#*###@#@@@@@@@+%%#%%#*@%@%*        \n" +
-                "    :%@     :##%*#%@@%%@@@@+=+%*@@@%%@%%*#        \n" +
-                "    *@.     =#@%*@#@@%@@@@%+#+=+*==*+#%%##        \n" +
-                "   =%@     ##@@@####%%@@@@#*+++#=++*#%%%##        \n" +
-                "   #@    :%@%@%@@#*##@@@@@@@@%%##++%*%#%%#-       \n" +
-                "  +@*  =#@@@%@%@%#%@%@@@@@%@%@@@@@@@@%@%#%#       \n" +
-                " .%@  :%@@@%@%@@%%%@%@@@@#%%%#@@@@@@#%#%%%#=      \n" +
-                " #@.  .@=@:%@%@@#%%@%@@@@%%%#*%@@@@@#%%%###*      ");
+        System.out.println("  /$$$$$$  /$$                             /$$                      /$$$$$$        /$$   /$$ /$$                   /$$                               /$$   /$$ /$$                                  /$$$$$$ \n" +
+                " /$$__  $$| $$                            | $$                     /$$__  $$      | $$  /$$/| $$                  | $$                              | $$  /$$/| $$                                 /$$__  $$\n" +
+                "| $$  \\__/| $$$$$$$   /$$$$$$   /$$$$$$$ /$$$$$$          /$$$$$$ | $$  \\__/      | $$ /$$/ | $$$$$$$   /$$$$$$  /$$$$$$   /$$   /$$ /$$$$$$$       | $$ /$$/ | $$$$$$$   /$$$$$$  /$$$$$$$       |__/  \\ $$\n" +
+                "| $$ /$$$$| $$__  $$ /$$__  $$ /$$_____/|_  $$_/         /$$__  $$| $$$$          | $$$$$/  | $$__  $$ /$$__  $$|_  $$_/  | $$  | $$| $$__  $$      | $$$$$/  | $$__  $$ |____  $$| $$__  $$        /$$$$$$/\n" +
+                "| $$|_  $$| $$  \\ $$| $$  \\ $$|  $$$$$$   | $$          | $$  \\ $$| $$_/          | $$  $$  | $$  \\ $$| $$  \\ $$  | $$    | $$  | $$| $$  \\ $$      | $$  $$  | $$  \\ $$  /$$$$$$$| $$  \\ $$       /$$____/ \n" +
+                "| $$  \\ $$| $$  | $$| $$  | $$ \\____  $$  | $$ /$$      | $$  | $$| $$            | $$\\  $$ | $$  | $$| $$  | $$  | $$ /$$| $$  | $$| $$  | $$      | $$\\  $$ | $$  | $$ /$$__  $$| $$  | $$      | $$      \n" +
+                "|  $$$$$$/| $$  | $$|  $$$$$$/ /$$$$$$$/  |  $$$$/      |  $$$$$$/| $$            | $$ \\  $$| $$  | $$|  $$$$$$/  |  $$$$/|  $$$$$$/| $$  | $$      | $$ \\  $$| $$  | $$|  $$$$$$$| $$  | $$      | $$$$$$$$\n" +
+                " \\______/ |__/  |__/ \\______/ |_______/    \\___/         \\______/ |__/            |__/  \\__/|__/  |__/ \\______/    \\___/   \\______/ |__/  |__/      |__/  \\__/|__/  |__/ \\_______/|__/  |__/      |________/");
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        System.out.println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                                                                                                 ⠀⠀⠀⠀   ⠀⠀⠀⠀⠀⠀⠀⠀⠀           ⠀⠀⠀⡆⢰⠀⠀⠀\n" +
+                "⠀⠀⠀⠘⡇⠀⠀⠀⢠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠀                                                                                                                                                      ⢠⠀⠀⠀⡇⠘⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⢷⠀⢠⢣⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                                                                                                                        ⡏⢣⢠⠀⢷⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⢘⣷⢸⣾⣇⣶⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                                                                                                                  ⣄⣦⣶⣇⣾⢸⣷⢘⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⣿⣿⣿⣹⣿⣿⣷⣿⣆⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                                                                                                 ⠀⠀          ⣀⣀⣆⣿⣷⣿⣿⣹⣿⣿⣿⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⢼⡇⣿⣿⣽⣶⣶⣯⣭⣷⣶⣿⣿⣶⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                                                                                               ⠀⠀  ⠀    ⣶⣿⣿⣶⣷⣭⣯⣶⣶⣽⣿⣿⡇⢼⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠸⠣⢿⣿⣿⣿⣿⡿⣛⣭⣭⣭⡙⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                                                                                                        ⠁⡙⣭⣭⣭⣛⡿⣿⣿⣿⣿⢿⠣⠸⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⣿⣿⣿⠿⠿⠿⢯⡛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                                                                                            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⡛⢯⠿⠿⠿⣿⣿⣿⣿⣿⠸⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣾⣿⡿⡷⢿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                                                                                            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⡄⢿⡷⡿⣿⣾⣿⣿⣿⣿⢠⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⡔⣺⣿⣿⣽⡿⣿⣿⣿⣟⡳⠦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ \t ██▀███    ██  ██████  ▓█████     ▒█████   ▒ ████▒    ▄▄▄█████▓  ██░ ██  ▓█████     ▒█████   ███▄ ▄███▓ ▓█████ ███▄    █⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠦⡳⣟⣿⣿⣿⡿⣽⣿⣿⣺⡔⠀⠀⠀⠀ \n" +
+                "⠀⠀⠀⠀⠀⠀⢠⣭⣾⣿⠃⣿⡇⣿⣿⡷⢾⣭⡓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\t▓██ ▒ ██▒▒▓██▒██    ▒  ▓█   ▀    ▒██▒  ██▒▒▓██        ▓  ██▒ ▓▒▒▓██░ ██  ▓█   ▀    ▒██▒  ██▒▓██▒▀█▀ ██▒ ▓█   ▀ ██ ▀█   █⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⡓⣭⢾⡷⣿⣿⡇⣿⠃⣿⣾⣭⢠⠀⠀⠀ \n" +
+                "⠀⠀⠀⠀⠀⠀⣾⣿⡿⠷⣿⣿⡇⣿⣿⣟⣻⠶⣭⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ \t▓██ ░▄█ ▒░▒██░ ▓██▄    ▒███      ▒██░  ██▒░▒████      ▒ ▓██░ ▒░░▒██▀▀██  ▒███      ▒██░  ██▒▓██    ▓██░ ▒███  ▓██  ▀█ ██▒⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⣭⠶⣻⣟⣿⣿⡇⣿⣿⠷⡿⣿⣾⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⣋⣵⣞⣭⣮⢿⣧⣝⣛⡛⠿⢿⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\t▒██▀▀█▄   ░██  ▒   ██▒ ▒▓█  ▄    ▒██   ██░░░▓█▒       ░ ▓██▓ ░  ░▓█ ░██  ▒▓█  ▄    ▒██   ██░▒██    ▒██  ▒▓█  ▄▓██▒  ▐▌██▒⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⣦⢿⠿⡛⣛⣝⣧⢿⣮⣭⣞⣵⣋⠀⠀\n" +
+                "⠀⣀⣀⣠⣶⣿⣿⣿⣿⡿⠟⣼⣿⡿⣟⣿⡇⠀⠙⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\t░██▓ ▒██▒ ░██▒██████▒▒▒░▒████    ░ ████▓▒░ ░▒█░         ▒██▒ ░  ░▓█▒░██▓▒░▒████    ░ ████▓▒░▒██▒   ░██▒▒░▒████▒██░   ▓██░⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠀⡇⣿⣟⡿⣿⣼⠟⡿⣿⣿⣿⣿⣶⣠⣀⣀⠀\n" +
+                "⡼⣿⣿⣿⢟⣿⣿⣿⣷⡿⠿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\t░ ▒▓ ░▒▓░ ░▓ ▒ ▒▓▒ ▒ ░░░░ ▒░     ░ ▒░▒░▒░   ▒ ░         ▒ ░░     ▒ ░░▒░▒░░░ ▒░     ░ ▒░▒░▒░ ░ ▒░   ░  ░░░░ ▒░ ░ ▒░   ▒ ▒ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⣿⣿⣿⣿⣿⠿⡿⣷⣿⣿⣿⢟⣿⣿⣿⡼\n" +
+                "⠀⠀⠉⠁⠀⢉⣭⣭⣽⣯⣿⣿⢿⣫⣮⣅⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\t  ░▒ ░ ▒░  ▒ ░ ░▒  ░ ░░ ░ ░        ░ ▒ ▒░   ░             ░      ▒ ░▒░ ░░ ░ ░        ░ ▒ ▒░ ░  ░      ░░ ░ ░  ░ ░░   ░ ▒░⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣅⣮⣫⢿⣿⣿⣯⣽⣭⣭⢉⠀⠁⠉⠀⠀\n" +
+                "⠀⠀⠀⠀⢀⣿⣟⣽⣿⣿⣿⣿⣾⣿⣿⣯⡛⠻⢷⣶⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀\t   ░   ░   ▒ ░  ░  ░      ░      ░ ░ ░ ▒    ░ ░         ░ ░      ░  ░░ ░    ░      ░ ░ ░ ▒  ░      ░       ░     ░   ░ ░ ⠀⠀⠀⠀⠀⠀⠀⡀⣄⣤⣶⢷⠻⡛⣯⣿⣿⣾⣿⣿⣿⣿⣽⣟⣿⢀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⢀⡞⣾⣿⣿⣿⣿⡟⣿⣿⣽⣿⣿⡿⠀⠀⠀⠈⠙⠛⠿⣶⣤⣄⡀⠀⠀\t   ░       ░       ░  ░   ░          ░ ░                         ░  ░  ░░   ░          ░ ░         ░   ░   ░           ░ ⠀⠀⡀⣄⣤⣶⠿⠛⠙⠈⠀⠀⠀⡿⣿⣿⣽⣿⣿⡟⣿⣿⣿⣿⣾⡞⢀⠀\t\n" +
+                "⠀⠀⠀⣾⣸⣿⣿⣷⣿⣿⢧⣿⣿⣿⣿⣿⣷⠁⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⢷⣦                                                                                                                            ⣦⢷⠻⠙⠈⠀⠀⠀⠀⠀⠀⠀⠁⣷⣿⣿⣿⣿⣿⢧⣿⣿⣷⣿⣿⣸⣾⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⡿⣛⣛⣛⣛⣿⣿⣸⣿⣿⣿⣻⣿⣿⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                                                                                              ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠆⣿⣿⣻⣿⣿⣿⣸⣿⣿⣛⣛⣛⣛⡿⠀⠀⠀⠀\n" +
+                "⠀⠀⢸⡇⣿⣿⣿⣿⣿⡏⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                                                                                             ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⡇⣿⣿⣿⣿⣿⣿⣿⡏⣿⣿⣿⣿⣿⡇⢸⠀\n" +
+                "⠀⠀⠀⢰⣶⣶⣶⣾⣿⢃⣿⣿⣿⣿⣯⣿⣭⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                                                                                             ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠁⣭⣿⣯⣿⣿⣿⣿⢃⣿⣾⣶⣶⣶⢰⠀⠀⠀");
+        System.out.print("");
         System.out.println();
         System.out.println();
         System.out.println(" __-----_________________{]__________________________________________________\n" +
                 "{&&&&&&&#%%&#%&%&%&%&%#%&|]__________________________________________________\\\n" +
                 "                         {]");
-        System.out.println();
+
         System.out.println();
         System.out.println("TYPE IN THE OPTION YOU WANT!");
         System.out.println("START");
@@ -429,11 +434,15 @@ public class GhostofKhotunKhan {
     //Prints out one of 5 encounter messages. These messages dictate who the player will fight.
     //Also, auto balances the HP and Attack of the encounter, depending on how powerful the player gets.
     public void encounterMessage() {
-        enemy.encounterNumber = (int) (Math.random() * 5) + 1;
+
+        double localEncounterNumber = enemy.getEncounterNumber() ;
+
+        localEncounterNumber = (int) (Math.random() * 5) + 1;
+
         if (finalBoss) {
-            enemy.encounterNumber = 6;
+            localEncounterNumber = 6;
         }
-        if (enemy.encounterNumber == 1) {
+        if (localEncounterNumber == 1) {
 
             System.out.println("[A group of bandits attack Jin from the bushes. IT'S AN AMBUSH!]");
             System.out.println("We have been oppressed by your family for too long! We don't care if we die, as long as you die too Khotun! Exclaimed one bandit");
@@ -444,7 +453,7 @@ public class GhostofKhotunKhan {
             enemy.setBaseDamage((player.getAtk() + 25) / 2);
         }
 
-        if (enemy.encounterNumber == 2) {
+        if (localEncounterNumber == 2) {
             System.out.println("[The soldiers confronting Khotun were laughing.]");
             System.out.println("Ai! Apparently we left one alive, let's finish him off. ahaha");
             System.out.println("[Khotun attacks them immediately!]");
@@ -452,20 +461,20 @@ public class GhostofKhotunKhan {
             enemy.setEnemyHp(player.getHp() * 3);
             enemy.setBaseDamage((player.getAtk() + 25) / 2);
         }
-        if (enemy.encounterNumber == 3) {
+        if (localEncounterNumber == 3) {
             System.out.println("\"AY! Ghost scum. Get ready to die! I'll kill you exactly how I've killed the countless other people like you who have tried revolting against the Japanese chain of command!\" " + "Shouted the Japanese general.");
             System.out.println("FOR MY PEOPLE! Shouted Khotun.\n");
             enemy.setEnemyHp(player.getHp() * 3);
             enemy.setBaseDamage((player.getAtk() + 25) / 2);
         }
-        if (enemy.encounterNumber == 4) {
+        if (localEncounterNumber == 4) {
             System.out.println("[Khotun gets spots a cannibal. It ravages the meat of a dead farmer.]");
             System.out.println("[Khotun calls them a Shyuri, a type of forsaken man that wanders the lands ]");
             System.out.println("I'll FACE you Shyuri, you will not ravage us any further!");
             enemy.setEnemyHp(player.getHp() * 3);
             enemy.setBaseDamage((player.getAtk() + 25) / 2);
         }
-        if (enemy.encounterNumber == 5) {
+        if (localEncounterNumber == 5) {
             System.out.println("[Khotun gets in an encounter with a wild bear during scouting the area!]");
             System.out.println("[This bear is diffrent though, they seem to have glowing orange eyes.]");
             System.out.println("FACE ME, AND LET ME SHOW YOU NATURES WRATH yells the bear.");
@@ -473,7 +482,7 @@ public class GhostofKhotunKhan {
             enemy.setEnemyHp(player.getHp() * 3);
             enemy.setBaseDamage((player.getAtk() + 25) / 2);
         }
-        if (enemy.encounterNumber == 6) {
+        if (localEncounterNumber == 6) {
             System.out.println("The ground rumbles around you. This is it. The final challenge between you and Victory.");
             System.out.println("Let the battle begin.\n");
             enemy.setEnemyHp(player.getHp() * 5);
@@ -568,160 +577,5 @@ public class GhostofKhotunKhan {
         }
     }
 
-    class Player {
-        //Variable Declaration
-        private int playerMaxHp, playerLevel, playerDef, playerAtk, score, milestoneProgress;
-        private double playerHp;
-        //Variable initialization
-        public Player() {
-            playerMaxHp = 100;
-            playerHp = 100;
-            playerLevel = 0;
-            playerDef = 5;
-            playerAtk = 5;
-            score = 100;
-        }
-
-        //If the player survived a combat encounter, call this with true or false
-        //Levels the player, resets their HP and adds attack and defense power
-        //also calls milestone to check if they have unlocked a new move on the level up
-        public void encounterSurvived(boolean didSurvive) {
-            if (didSurvive) {
-                System.out.println("You live to see another day.");
-                System.out.println("Congrats, you leveled up!");
-                playerHp = playerMaxHp;
-                playerLevel = playerLevel + 1;
-                playerDef = 3 * playerLevel;
-                playerAtk = 2 * playerLevel + 5;
-                playerMaxHp = 15 * playerLevel + 100;
-                milestone();
-            }
-        }
-
-        //returns true or false based on it the player is alive or not
-        public boolean isAlive() {
-            return playerHp > 0;
-        }
-
-        //When called, allows to set the players HP
-        public void setHp(double Hp) {
-            playerHp = Hp;
-        }
-
-        //returns the players HP when called
-        public double getHp() {
-            return playerHp;
-        }
-
-        //gets the players level when called
-        public int getLevel() {
-            return playerLevel;
-        }
-
-        //Gets the players score when called
-        public int getScore() {
-            score = score * playerLevel + playerAtk;
-            return score;
-        }
-
-        //gets the players defense when called
-        public int getDef() {
-            return playerDef;
-        }
-
-        //gets the players attack when called
-        public int getAtk() {
-            return playerAtk;
-        }
-
-        //returns what milestone the player is on when called
-        //Milestones are either 1,2 or 3 and is dictated based on
-        //the level of the player.
-        public int getMilestone() {
-            return milestoneProgress;
-        }
-
-        //Game over for the player, when they either die or mess up
-        //exits the game and prints their score pre death
-        public void gameOver() {
-            if (!isAlive()) {
-                score = score * playerLevel + playerAtk;
-                System.out.println("GAME OVER!");
-                System.out.println("With the death of Khotun, the bloodiest coup in mankind's history unfolds. If only, his blade was sharper.");
-                System.out.println("Your Final Score was: " + score);
-                System.out.println("The game will exit in 15 seconds!");
-                tempStop(15);
-                System.exit(0);
-            }
-        }
-
-
-        //Checks the player level with set levels, and updates the milestone
-        //variable as suited. This is then used for various different things
-        //such as special moves, story settings & score system
-        public void milestone() {
-            if (playerLevel == 5) {
-                System.out.println("You've unlocked Heavenly JUSTICE!");
-                System.out.println("Use this special move to channel the might of the gods in your blade!");
-                milestoneProgress = 1;
-            }
-            if (playerLevel == 10) {
-                System.out.println("You've unlocked Forsaken World, Chasing Slice!");
-                System.out.println("Use the power of this cursed world to pierce the enemies very soul.");
-                milestoneProgress = 2;
-
-            }
-            if (playerLevel == 15) {
-                System.out.println("You've unlocked the Shroud of the Ghost!");
-                System.out.println("Harness your power to shroud yourself in a thick cloak of shadows. Strike from the shadows while having the immunity of demi-gods!");
-                milestoneProgress = 3;
-            }
-
-        }
-    }
-
-
-    class Enemy {
-        //variable declaration
-        private double enemyDef, enemyHp, encounterNumber, baseDamage;
-
-        //Variable initialization
-        public Enemy() {
-            enemyDef = 0;
-            enemyHp = 0;
-            encounterNumber = 0;
-        }
-
-        //returns true or false depending on if the enemy is alive
-        public boolean isAlive() {
-            return enemyHp > 0;
-        }
-
-        //returns the enemy's defense
-        public double getEnemyDef() {
-            return enemyDef;
-        }
-
-        //Sets the enemy's base damage when called with a double
-        public void setBaseDamage(double Damage) {
-            baseDamage = Damage;
-        }
-
-        //returns the enemy's base damage
-        public double getbaseDamage() {
-            return baseDamage;
-        }
-
-        //returns the enemy's HP when called
-        public double getEnemyHp() {
-            return enemyHp;
-        }
-
-        //sets the enemy's hp when called and given a double
-        public void setEnemyHp(double enemyCurrentHp) {
-            enemyHp = enemyCurrentHp;
-        }
-
-    }
 
 }
