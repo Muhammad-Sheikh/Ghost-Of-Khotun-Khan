@@ -1,7 +1,6 @@
 /*
 TODO
--Add rest of the attirbute tables and random way to find them
--Add shop interaction
+-Add rest of the attirbute tables
 -Add random encounter + world generation
 -Add upgraded leveling system
 -Add generic encounters
@@ -224,6 +223,11 @@ public class GhostofKhotunKhan2 {
         world2.setValidPool();
         world2.newShop();
 
+        while (true)
+        {
+            int choice = (int) (Math.random() * 2 + 0);
+            System.out.println(choice);
+        }
 
 
 
@@ -439,7 +443,7 @@ public class GhostofKhotunKhan2 {
         localEncounterNumber = (int) (Math.random() * 5) + 1;
 
         if (finalBoss) {
-            localEncounterNumber = 6;
+            localEncounterNumber = 13;
         }
         if (localEncounterNumber == 1) {
 
@@ -487,6 +491,31 @@ public class GhostofKhotunKhan2 {
             enemy.setEnemyHp(player.getHp() * 5);
             enemy.setBaseDamage((player.getAtk() + 50));
         }
+        if (localEncounterNumber == 7) {
+            System.out.println("Add Guy");
+            System.out.println("Let the battle begin.\n");
+            enemy.setEnemyHp(player.getHp() * 5);
+            enemy.setBaseDamage((player.getAtk() + 50));
+        }
+        if (localEncounterNumber == 8) {
+            System.out.println("Add Guy");
+            System.out.println("Let the battle begin.\n");
+            enemy.setEnemyHp(player.getHp() * 5);
+            enemy.setBaseDamage((player.getAtk() + 50));
+        }
+        if (localEncounterNumber == 9) {
+            System.out.println("Add Guy");
+            System.out.println("Let the battle begin.\n");
+            enemy.setEnemyHp(player.getHp() * 5);
+            enemy.setBaseDamage((player.getAtk() + 50));
+        }
+        if (localEncounterNumber == 10) {
+            System.out.println("Add Guy");
+            System.out.println("Let the battle begin.\n");
+            enemy.setEnemyHp(player.getHp() * 5);
+            enemy.setBaseDamage((player.getAtk() + 50));
+        }
+
     }
 
     //Main combat method. When called, prints out one of the encounter message and starts the turn based combat.
@@ -548,7 +577,44 @@ public class GhostofKhotunKhan2 {
                     enemy.setEnemyHp(enemyHp);
                     System.out.println("Damage Dealt: " + playerAtk);
                     playerInput = 0;
-                } else if (player.getMilestone() < 1)
+                }
+                if (player.getMilestone() == 4)
+                {
+                    System.out.println("SPECIAL MOVE #4: Khotun Blast");
+                    System.out.println("Charge your energy into a concentrated blast for your enemies!\n ");
+                    playerAtk = player.getAtk() + 175;
+                    enemyHp = enemy.getEnemyHp() - playerAtk;
+                    enemy.setEnemyHp(enemyHp);
+                    System.out.println("Damage Dealt: " + playerAtk);
+                    playerInput = 0;
+                }
+                if (player.getMilestone() == 5)
+                {
+                    System.out.println("SPECIAL MOVE #5: Khotuns Ascension");
+                    System.out.println("Khotun sacrificed half his lifeforce to the gods above. In exchange, his life and energy are tripled for now...\n ");
+                    player.setHp(player.getHp() * 2);
+                    player.setEnergy(player.getEnergy() * 2);
+                    System.out.println("You feel empowered...");
+                    playerInput = 0;
+                }
+                if (player.getMilestone() == 6)
+                {
+                    System.out.println("SPECIAL MOVE #5: Khotuns Killer Gambit");
+                    System.out.println("Khotuns rams his sword through his heart, and draw a sword coated in his own blood.\n ");
+                    System.out.println("With one strike, he will either end his enemy or himself.\n ");
+                    int choice = (int) (Math.random() * 2 + 0);
+                    if(choice == 1)
+                    {
+                        enemy.setEnemyHp(-1);
+                        System.out.println("You got lucky.");
+                    } else
+                    {
+                        player.setHp((player.getHp()/2));
+                        System.out.println("The Gambit has failed...");
+                    }
+                    playerInput = 0;
+                }
+                else if (player.getMilestone() < 1)
                 {
                     System.out.println("Khotun Tried to summon a power of some kind, but it seems to fail due to a lack of power!");
                     System.out.println("He hears a voice, saying that he may find some new moves at level 5, 10 & 15 \n");

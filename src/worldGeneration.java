@@ -1,16 +1,17 @@
+import java.awt.*;
 import java.util.Arrays;
 
 public class worldGeneration
 {
     //20 Encounters per Playthrough
 
-    //3 mini bosses
+    //2 mini bosses
 
     //1 final boss
 
     //10 combat encounters
 
-    //2 shop interactions
+    //3 shop interactions
 
     //
     private int RandomizervalidPool[];
@@ -23,11 +24,12 @@ public class worldGeneration
     public void setValidPool()
     {
         //Function used to reset the valid pool that the question randomizer uses
-        RandomizervalidPool = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        RandomizervalidPool = new int[]{100, 200, 300, 400, 500, 600, 700, 800, 900, 1000};
     }
+
+
     public void generateAttributeTable()
     {
-
         //Items
         worldGeneration sword1 = new worldGeneration();
         worldGeneration sword2 = new worldGeneration();
@@ -50,13 +52,14 @@ public class worldGeneration
 
         boolean newItem = false;
 
-        while(!newItem)
-        {
+        while(!newItem) {
             currentRand = (int) (Math.random() * 4 + 0);
-            if (RandomizervalidPool[currentRand] == 1) {
+
+
+            if (RandomizervalidPool[currentRand] == 100) {
                 //Sets its own index value to 0, so it cannot be used again
                 RandomizervalidPool[currentRand] = 0;
-                sword1.name ="Bruh City";
+                sword1.name = "Bruh City";
                 sword1.attackPower = 20;
                 sword1.defensePower = 20;
                 sword1.hpBoost = 30;
@@ -67,9 +70,10 @@ public class worldGeneration
                 newItem = true;
             }
 
-            if (RandomizervalidPool[currentRand] == 2) {
+            //If the random index number in RandomizervalidPool lines up with this, it sets the current question, options and answer.
+            if (RandomizervalidPool[currentRand] == 200) {
                 RandomizervalidPool[currentRand] = 0;
-                sword2.name ="Not Bruh City";
+                sword2.name = "Not Bruh City";
                 sword2.attackPower = 20;
                 sword2.defensePower = 20;
                 sword2.hpBoost = 30;
@@ -80,7 +84,8 @@ public class worldGeneration
                 newItem = true;
             }
 
-            if (RandomizervalidPool[currentRand] == 3) {
+            if (RandomizervalidPool[currentRand] == 300)
+            {
                 RandomizervalidPool[currentRand] = 0;
                 sword3.name ="Not Bruh City MK2";
                 sword3.attackPower = 20;
@@ -92,31 +97,47 @@ public class worldGeneration
                 attributeTable = (new String[]{sword3.name, (String.valueOf(sword3.attackPower)), (String.valueOf(sword3.defensePower)), (String.valueOf(sword3.hpBoost)), (String.valueOf(sword3.energyBoost)), (String.valueOf(sword3.specialPower)), (String.valueOf(sword3.price))});
                 newItem = true;
             }
+
+            if (RandomizervalidPool[currentRand] == 400)
+            {
+                RandomizervalidPool[currentRand] = 0;
+                sword3.name ="Not Bruh City MK3";
+                sword3.attackPower = 20;
+                sword3.defensePower = 20;
+                sword3.hpBoost = 30;
+                sword3.energyBoost = 35;
+                sword3.specialPower = 45;
+                sword3.price = 20;
+                attributeTable = (new String[]{sword3.name, (String.valueOf(sword3.attackPower)), (String.valueOf(sword3.defensePower)), (String.valueOf(sword3.hpBoost)), (String.valueOf(sword3.energyBoost)), (String.valueOf(sword3.specialPower)), (String.valueOf(sword3.price))});
+                newItem = true;
+            }
         }
-
-
-
     }
-
     public void newShop()
     {
         System.out.println("Welcome to my shop");
         System.out.println("Here is what I am selling today!");
-        generateAttributeTable();
-        String localAttributeTable[] = attributeTable.clone();
-        //for(int i = 0; i <= 2;i++)
 
             generateAttributeTable();
-            System.out.println("Name: " + localAttributeTable[0]);
-            System.out.println("Price: " + localAttributeTable[6]);
+            String localAttributeTable1[] = attributeTable.clone();
+            System.out.println("Item #1");
+            System.out.println("Name: " + localAttributeTable1[0]);
+            System.out.println("Price: " + localAttributeTable1[6]);
 
         generateAttributeTable();
-        System.out.println("Name: " + localAttributeTable[0]);
-        System.out.println("Price: " + localAttributeTable[6]);
+        String localAttributeTable2[] = attributeTable.clone();
+        System.out.println("Item #2");
+        System.out.println("Name: " + localAttributeTable2[0]);
+        System.out.println("Price: " + localAttributeTable2[6]);
 
         generateAttributeTable();
-        System.out.println("Name: " + localAttributeTable[0]);
-        System.out.println("Price: " + localAttributeTable[6]);
+        String localAttributeTable3[] = attributeTable.clone();
+        System.out.println("Item #3");
+        System.out.println("Name: " + localAttributeTable3[0]);
+        System.out.println("Price: " + localAttributeTable3[6]);
+
+
+        System.out.println("Enter the item you want to buy!");
 
     }
     public String[] getAttributeTable() {

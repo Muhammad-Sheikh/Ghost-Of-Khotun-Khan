@@ -1,6 +1,6 @@
 class Player {
     //Variable Declaration
-    private int playerMaxHp, playerLevel, playerDef, playerAtk, score, milestoneProgress, coins;
+    private int playerMaxHp, playerLevel, playerDef, playerAtk, score, milestoneProgress, coins, energy;
     private double playerHp;
     //Variable
 
@@ -50,6 +50,10 @@ class Player {
     {
         return coins;
     }
+
+    public int getEnergy(){return energy;}
+    public void setEnergy(int NRG){energy =  NRG;}
+
 
     //returns the players HP when called
     public double getHp() {
