@@ -1,20 +1,17 @@
 class Enemy {
     //variable declaration
-    private double enemyDef, enemyHp, encounterNumber, baseDamage;
+    private double enemyDef, enemyHp, baseDamage;
 
     //Variable initialization
     public Enemy() {
         enemyDef = 0;
         enemyHp = 0;
-        encounterNumber = 0;
     }
 
     //returns true or false depending on if the enemy is alive
     public boolean isAlive() {
         return enemyHp > 0;
     }
-
-    public double getEncounterNumber(){return encounterNumber;}
 
 
     //returns the enemy's defense

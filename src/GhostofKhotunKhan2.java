@@ -1,11 +1,9 @@
 /*
 TODO
 -Add rest of the attirbute tables
--Add random encounter + world generation
--Add upgraded leveling system
 -Add generic encounters
--Add more abilties
 -Add coloured text where needed
+-make int input cleaners into string ones
  */
 
 import java.util.*;
@@ -15,7 +13,7 @@ import java.util.*;
 //By: Muhammad Sheikh & Hassan Abassi
 //Summative for ICS201-7C
 //Date: 2022/06/15
-public class GhostofKhotunKhan2 {
+class GhostofKhotunKhan2 {
 
 
     public static void main(String[] args) {
@@ -23,7 +21,17 @@ public class GhostofKhotunKhan2 {
 
         //Object Declaration
         GhostofKhotunKhan2 main = new GhostofKhotunKhan2();
-        worldGeneration world2 = new worldGeneration();
+
+        Player player = new Player();
+        Enemy enemy = new Enemy();
+        worldGeneration world = new worldGeneration(player, enemy, main);
+        Combat combat = new Combat(enemy, player, main, world);
+
+
+        //player.setPlayerLevel(12);
+        world.encounterMessage(1);
+        combat.Combat();
+
 
         /*
         //Calls title screen
@@ -220,34 +228,39 @@ public class GhostofKhotunKhan2 {
             main.gameFinished();
          */
 
-        world2.setValidPool();
-        world2.newShop();
 
-        while (true)
-        {
-            int choice = (int) (Math.random() * 2 + 0);
-            System.out.println(choice);
-        }
+        //world.test();
+/*
+        world.setValidItemPool();
+        world.newShop();
 
+        System.out.println(Arrays.toString(world.getItem1()));
+        System.out.println(Arrays.toString(world.getItem2()));
+
+        world.setValidItemPool();
+        world.newShop();
+
+        System.out.println(Arrays.toString(world.getItem1()));
+        System.out.println(Arrays.toString(world.getItem2()));
+ */
 
 
     }
 
 
+    //Replace with instance methods
     Player player = new Player();
     Enemy enemy = new Enemy();
-
-    worldGeneration world = new worldGeneration();
-
-
+    //GhostofKhotunKhan2 main = new GhostofKhotunKhan2();
+    //worldGeneration world = new worldGeneration(player, enemy,main) ;
 
 
     //main variable setup
-    int playerInput;
+    String playerInput;
     char dummy;
     boolean gameStart, finalBoss;
     String playerStart;
-    double enemyHp, enemyDef, enemyChoice, playerAtk, playerHp, playerDef;
+
 
     //Clears the users screen of any past text
     public void textClear() {
@@ -267,10 +280,12 @@ public class GhostofKhotunKhan2 {
         } catch (InterruptedException ie) {
         }
     }
+
     //asks user to input a key
     public void contunieChar() {
         System.out.println("Press Any Key to Continue!");
     }
+
     //Ran at the end of the game to print  credits and score of the player
     public void gameFinished() {
         System.out.println("Congrats! You've Beaten Ghost of Khotun Khan!");
@@ -422,225 +437,5 @@ public class GhostofKhotunKhan2 {
         return gameStart = false;
     }
 
-    //Prints the players' status, as in the HP, Attack, and Defense  & level.
-    //Also asks the player what they will do, and stores it as a variable
-    public void playerStatus() {
-        System.out.println("Current HP: " + player.getHp());
-        System.out.println("Current Attack: " + player.getAtk());
-        System.out.println("Current Defense: " + player.getDef());
-        System.out.println("Current Level: " + player.getLevel());
-        System.out.println("What will you do? Enter 1 to Attack, 2 to Defend, 3 to see special moves!\n");
-        Scanner CombatInput = new Scanner(System.in);
-        playerInput = CombatInput.nextInt();
-    }
-
-    //Prints out one of 5 encounter messages. These messages dictate who the player will fight.
-    //Also, auto balances the HP and Attack of the encounter, depending on how powerful the player gets.
-    public void encounterMessage() {
-
-        double localEncounterNumber = enemy.getEncounterNumber() ;
-
-        localEncounterNumber = (int) (Math.random() * 5) + 1;
-
-        if (finalBoss) {
-            localEncounterNumber = 13;
-        }
-        if (localEncounterNumber == 1) {
-
-            System.out.println("[A group of bandits attack Jin from the bushes. IT'S AN AMBUSH!]");
-            System.out.println("We have been oppressed by your family for too long! We don't care if we die, as long as you die too Khotun! Exclaimed one bandit");
-            System.out.println("You fool it is what you did that has made you oppressed. Said Khotun");
-            System.out.println("Fine, you leave me no choice. Get ready to die, bandits. Said Khotun");
-            System.out.println("May you all rest in peace… It's sad that your actions led to this. I hope the next generation doesn't make the same mistakes.\n");
-            enemy.setEnemyHp(player.getHp() * 3);
-            enemy.setBaseDamage((player.getAtk() + 25) / 2);
-        }
-
-        if (localEncounterNumber == 2) {
-            System.out.println("[The soldiers confronting Khotun were laughing.]");
-            System.out.println("Ai! Apparently we left one alive, let's finish him off. ahaha");
-            System.out.println("[Khotun attacks them immediately!]");
-            System.out.println("[They are in a intense face-off!]\n");
-            enemy.setEnemyHp(player.getHp() * 3);
-            enemy.setBaseDamage((player.getAtk() + 25) / 2);
-        }
-        if (localEncounterNumber == 3) {
-            System.out.println("\"AY! Ghost scum. Get ready to die! I'll kill you exactly how I've killed the countless other people like you who have tried revolting against the Japanese chain of command!\" " + "Shouted the Japanese general.");
-            System.out.println("FOR MY PEOPLE! Shouted Khotun.\n");
-            enemy.setEnemyHp(player.getHp() * 3);
-            enemy.setBaseDamage((player.getAtk() + 25) / 2);
-        }
-        if (localEncounterNumber == 4) {
-            System.out.println("[Khotun gets spots a cannibal. It ravages the meat of a dead farmer.]");
-            System.out.println("[Khotun calls them a Shyuri, a type of forsaken man that wanders the lands ]");
-            System.out.println("I'll FACE you Shyuri, you will not ravage us any further!");
-            enemy.setEnemyHp(player.getHp() * 3);
-            enemy.setBaseDamage((player.getAtk() + 25) / 2);
-        }
-        if (localEncounterNumber == 5) {
-            System.out.println("[Khotun gets in an encounter with a wild bear during scouting the area!]");
-            System.out.println("[This bear is diffrent though, they seem to have glowing orange eyes.]");
-            System.out.println("FACE ME, AND LET ME SHOW YOU NATURES WRATH yells the bear.");
-            System.out.println("Khotun readies his weapon.");
-            enemy.setEnemyHp(player.getHp() * 3);
-            enemy.setBaseDamage((player.getAtk() + 25) / 2);
-        }
-        if (localEncounterNumber == 6) {
-            System.out.println("The ground rumbles around you. This is it. The final challenge between you and Victory.");
-            System.out.println("Let the battle begin.\n");
-            enemy.setEnemyHp(player.getHp() * 5);
-            enemy.setBaseDamage((player.getAtk() + 50));
-        }
-        if (localEncounterNumber == 7) {
-            System.out.println("Add Guy");
-            System.out.println("Let the battle begin.\n");
-            enemy.setEnemyHp(player.getHp() * 5);
-            enemy.setBaseDamage((player.getAtk() + 50));
-        }
-        if (localEncounterNumber == 8) {
-            System.out.println("Add Guy");
-            System.out.println("Let the battle begin.\n");
-            enemy.setEnemyHp(player.getHp() * 5);
-            enemy.setBaseDamage((player.getAtk() + 50));
-        }
-        if (localEncounterNumber == 9) {
-            System.out.println("Add Guy");
-            System.out.println("Let the battle begin.\n");
-            enemy.setEnemyHp(player.getHp() * 5);
-            enemy.setBaseDamage((player.getAtk() + 50));
-        }
-        if (localEncounterNumber == 10) {
-            System.out.println("Add Guy");
-            System.out.println("Let the battle begin.\n");
-            enemy.setEnemyHp(player.getHp() * 5);
-            enemy.setBaseDamage((player.getAtk() + 50));
-        }
-
-    }
-
-    //Main combat method. When called, prints out one of the encounter message and starts the turn based combat.
-    //Also handles special move allocation, as in the player can use their special moves here after unlocking them via playing the game or tell the player how to get it
-    //Also handles enemy combat and what they do per turn
-    public void Combat() {
-        encounterMessage();
-        while (player.isAlive() && enemy.isAlive()) {
-            playerStatus();
-            if (playerInput >= 4 || playerInput <= 0) {
-                System.out.println("In the heat of the battle, Kohotun could not decide what to do.\n");
-                System.out.println("The enemy saw him confused, and pierced his heart in a swift strike!");
-                player.setHp(-1);
-                player.gameOver();
-            }
-            if (playerInput == 1) {
-                playerAtk = player.getAtk() + 100;
-                enemyHp = enemy.getEnemyHp() - playerAtk;
-                enemy.setEnemyHp(enemyHp);
-                System.out.println("You did: " + playerAtk + " Damage!");
-                playerInput = 0;
-
-            }
-            if (playerInput == 2) {
-                playerDef = player.getDef() / 100;
-                playerHp = (player.getHp() - (enemy.getbaseDamage() - (enemy.getbaseDamage() * playerDef)));
-                player.setHp(playerHp);
-                System.out.println("You Took: " + enemy.getbaseDamage() + " Damage!");
-                playerInput = 0;
-            }
-
-            if (playerInput == 3) {
-                if (player.getMilestone() == 1)
-                {
-                    System.out.println("SPECIAL MOVE #1: Heavenly STRIKE");
-                    System.out.println("Summon the Ancestors power, and hone your sword into a weapon of perfection.\n");
-                    playerAtk = player.getAtk() + 125;
-                    enemyHp = enemy.getEnemyHp() - playerAtk;
-                    enemy.setEnemyHp(enemyHp);
-                    System.out.println("Damage Dealt: \n" + playerAtk);
-                    playerInput = 0;
-                }
-                if (player.getMilestone() == 2)
-                {
-                    System.out.println("SPECIAL MOVE #2: Forsaken World, Chasing Slice");
-                    System.out.println("As you remind yourself of the loss around you, you forsake the world. You feel a surge of power, and in a flash you deliver a strike that shakes the ground.\n");
-                    playerAtk = player.getAtk() + 150;
-                    enemyHp = enemy.getEnemyHp() - playerAtk;
-                    enemy.setEnemyHp(enemyHp);
-                    System.out.println("Damage Dealt: " + playerAtk);
-                    playerInput = 0;
-                }
-                if (player.getMilestone() == 3)
-                {
-                    System.out.println("SPECIAL MOVE #3: Shroud of the Ghost");
-                    System.out.println("As you summon the power within, a cloak of shadows emerges. You are un-seen, un-heard, and strike the enemies very soul.\n ");
-                    playerAtk = player.getAtk() + 175;
-                    enemyHp = enemy.getEnemyHp() - playerAtk;
-                    enemy.setEnemyHp(enemyHp);
-                    System.out.println("Damage Dealt: " + playerAtk);
-                    playerInput = 0;
-                }
-                if (player.getMilestone() == 4)
-                {
-                    System.out.println("SPECIAL MOVE #4: Khotun Blast");
-                    System.out.println("Charge your energy into a concentrated blast for your enemies!\n ");
-                    playerAtk = player.getAtk() + 175;
-                    enemyHp = enemy.getEnemyHp() - playerAtk;
-                    enemy.setEnemyHp(enemyHp);
-                    System.out.println("Damage Dealt: " + playerAtk);
-                    playerInput = 0;
-                }
-                if (player.getMilestone() == 5)
-                {
-                    System.out.println("SPECIAL MOVE #5: Khotuns Ascension");
-                    System.out.println("Khotun sacrificed half his lifeforce to the gods above. In exchange, his life and energy are tripled for now...\n ");
-                    player.setHp(player.getHp() * 2);
-                    player.setEnergy(player.getEnergy() * 2);
-                    System.out.println("You feel empowered...");
-                    playerInput = 0;
-                }
-                if (player.getMilestone() == 6)
-                {
-                    System.out.println("SPECIAL MOVE #5: Khotuns Killer Gambit");
-                    System.out.println("Khotuns rams his sword through his heart, and draw a sword coated in his own blood.\n ");
-                    System.out.println("With one strike, he will either end his enemy or himself.\n ");
-                    int choice = (int) (Math.random() * 2 + 0);
-                    if(choice == 1)
-                    {
-                        enemy.setEnemyHp(-1);
-                        System.out.println("You got lucky.");
-                    } else
-                    {
-                        player.setHp((player.getHp()/2));
-                        System.out.println("The Gambit has failed...");
-                    }
-                    playerInput = 0;
-                }
-                else if (player.getMilestone() < 1)
-                {
-                    System.out.println("Khotun Tried to summon a power of some kind, but it seems to fail due to a lack of power!");
-                    System.out.println("He hears a voice, saying that he may find some new moves at level 5, 10 & 15 \n");
-                }
-            }
-
-            enemyChoice = (int) (Math.random() * 2) + 1;
-            if (enemyChoice == 1 && playerInput == 0) {
-                playerHp = player.getHp() - enemy.getbaseDamage();
-                player.setHp(playerHp);
-                System.out.println("The enemy strikes you! They deal " + enemy.getbaseDamage() + " Damage!\n");
-            } else if (enemyChoice == 2 && playerInput == 0) {
-                enemyDef = enemy.getEnemyDef() / 100;
-                playerAtk = player.getAtk() + 50;
-                enemyHp = (enemy.getEnemyHp() - (playerAtk - (playerAtk * enemyDef)));
-                enemy.setEnemyHp(enemyHp);
-                System.out.println("You see an opening in the enemies defense! You strike and do " + playerAtk + " Damage!\n");
-            }
-            tempStop(3);
-        }
-        if (player.isAlive()) {
-            player.encounterSurvived(true);
-        } else if (!player.isAlive()) {
-            player.gameOver();
-        }
-    }
-
-
 }
+
