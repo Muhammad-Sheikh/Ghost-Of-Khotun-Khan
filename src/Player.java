@@ -113,9 +113,7 @@ class Player {
     }
 
     //returns the players HP when called
-    public double getHp() {
-        return playerHp;
-    }
+    public double getHp() {return playerHp;}
     public void setPlayerMaxHp(int maxhp)
     {
         playerMaxHp = maxhp;

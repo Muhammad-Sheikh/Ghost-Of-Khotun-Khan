@@ -20,8 +20,7 @@ public class worldGeneration {
 
     private String attributeTable[];
     private double attackPower, defensePower, hpBoost, energyBoost, specialPower;
-
-    private String test;
+    
     Scanner worldScanner = new Scanner(System.in);
 
     private Player worldPlayer;
@@ -114,9 +113,9 @@ public class worldGeneration {
             if (RandomizervalidPool[currentRand] == 100) {
                 //Sets its own index value to 0, so it cannot be used again
                 RandomizervalidPool[currentRand] = 0;
-                sword1.name = "Bruh City";
+                sword1.name = "Sword1";
                 sword1.attackPower = 20;
-                sword1.defensePower = 20;
+                sword1.defensePower = 2;
                 sword1.hpBoost = 30;
                 sword1.energyBoost = 35;
                 sword1.specialPower = 45;
@@ -128,9 +127,9 @@ public class worldGeneration {
             //If the random index number in RandomizervalidPool lines up with this, it sets the current question, options and answer.
             if (RandomizervalidPool[currentRand] == 200) {
                 RandomizervalidPool[currentRand] = 0;
-                sword2.name = "Not Bruh City";
+                sword2.name = "Sword2";
                 sword2.attackPower = 20;
-                sword2.defensePower = 20;
+                sword2.defensePower = 1;
                 sword2.hpBoost = 30;
                 sword2.energyBoost = 35;
                 sword2.specialPower = 45;
@@ -141,9 +140,9 @@ public class worldGeneration {
 
             if (RandomizervalidPool[currentRand] == 300) {
                 RandomizervalidPool[currentRand] = 0;
-                sword3.name = "Not Bruh City MK2";
+                sword3.name = "Sword3";
                 sword3.attackPower = 20;
-                sword3.defensePower = 20;
+                sword3.defensePower = 3;
                 sword3.hpBoost = 30;
                 sword3.energyBoost = 35;
                 sword3.specialPower = 45;
@@ -154,21 +153,56 @@ public class worldGeneration {
 
             if (RandomizervalidPool[currentRand] == 400) {
                 RandomizervalidPool[currentRand] = 0;
-                sword3.name = "Not Bruh City MK3";
-                sword3.attackPower = 20;
-                sword3.defensePower = 20;
-                sword3.hpBoost = 30;
-                sword3.energyBoost = 35;
-                sword3.specialPower = 45;
-                sword3.price = 20;
-                attributeTable = (new String[]{sword3.name, (String.valueOf(sword3.attackPower)), (String.valueOf(sword3.defensePower)), (String.valueOf(sword3.hpBoost)), (String.valueOf(sword3.energyBoost)), (String.valueOf(sword3.specialPower)), (String.valueOf(sword3.price))});
+                sword4.name = "Sword4";
+                sword4.attackPower = 20;
+                sword4.defensePower = 1;
+                sword4.hpBoost = 40;
+                sword4.energyBoost = 45;
+                sword4.specialPower = 45;
+                sword4.price = 20;
+                attributeTable = (new String[]{sword4.name, (String.valueOf(sword4.attackPower)), (String.valueOf(sword4.defensePower)), (String.valueOf(sword4.hpBoost)), (String.valueOf(sword4.energyBoost)), (String.valueOf(sword4.specialPower)), (String.valueOf(sword4.price))});
+                newItem = true;
+            }
+            if (RandomizervalidPool[currentRand] == 500) {
+                RandomizervalidPool[currentRand] = 0;
+                sword5.name = "Sword5";
+                sword5.attackPower = 25;
+                sword5.defensePower = 2;
+                sword5.hpBoost = 50;
+                sword5.energyBoost = 55;
+                sword5.specialPower = 45;
+                sword5.price = 500;
+                attributeTable = (new String[]{sword4.name, (String.valueOf(sword4.attackPower)), (String.valueOf(sword4.defensePower)), (String.valueOf(sword4.hpBoost)), (String.valueOf(sword4.energyBoost)), (String.valueOf(sword4.specialPower)), (String.valueOf(sword4.price))});
+                newItem = true;
+            }
+            if (RandomizervalidPool[currentRand] == 600) {
+                RandomizervalidPool[currentRand] = 0;
+                sheild1.name = "shield1";
+                sheild1.attackPower = 20;
+                sheild1.defensePower = 4;
+                sheild1.hpBoost = 60;
+                sheild1.energyBoost = 65;
+                sheild1.specialPower = 45;
+                sheild1.price = 20;
+                attributeTable = (new String[]{sheild1.name, (String.valueOf(sheild1.attackPower)), (String.valueOf(sheild1.defensePower)), (String.valueOf(sheild1.hpBoost)), (String.valueOf(sheild1.energyBoost)), (String.valueOf(sheild1.specialPower)), (String.valueOf(sheild1.price))});
+                newItem = true;
+            }
+            if (RandomizervalidPool[currentRand] == 700) {
+                RandomizervalidPool[currentRand] = 0;
+                sheild2.name = "shield2";
+                sheild2.attackPower = 20;
+                sheild2.defensePower = 3;
+                sheild2.hpBoost = 30;
+                sheild2.energyBoost = 35;
+                sheild2.specialPower = 45;
+                sheild2.price = 20;
+                attributeTable = (new String[]{sheild2.name, (String.valueOf(sheild2.attackPower)), (String.valueOf(sheild2.defensePower)), (String.valueOf(sheild2.hpBoost)), (String.valueOf(sheild2.energyBoost)), (String.valueOf(sheild2.specialPower)), (String.valueOf(sheild2.price))});
                 newItem = true;
             }
         }
     }
 
     public void newShop() {
-        worldPlayer.setCoins(99999);
         System.out.println("Welcome to my shop");
         System.out.println("Here is what I am selling today!");
 
@@ -259,7 +293,7 @@ public class worldGeneration {
             localEncounterNumber = (int) (Math.random() * (10 - 1) + 1);
         } else if (encounterType == 2) {
             //Mini Boss Encounter
-            localEncounterNumber = (int) (Math.random() * (12 - 11) + 11);
+            localEncounterNumber = (int) (Math.random() * (13 - 11) + 11);
         } else if (encounterType == 3) {
             //Final Boss Encounter
             localEncounterNumber = 13;
@@ -309,13 +343,13 @@ public class worldGeneration {
             worldEnemy.setBaseDamage((worldPlayer.getAtk() + 25) / 2);
         }
         if (localEncounterNumber == 6) {
-            System.out.println("The ground rumbles around you. This is it. The final challenge between you and Victory.");
+            System.out.println("The ground rumbles around you. Its a massive earthworm emerges!");
             System.out.println("Let the battle begin.\n");
             worldEnemy.setEnemyHp(worldPlayer.getHp() * 5);
             worldEnemy.setBaseDamage((worldPlayer.getAtk() + 50));
         }
         if (localEncounterNumber == 7) {
-            System.out.println("Add Guy");
+            System.out.println("");
             System.out.println("Let the battle begin.\n");
             worldEnemy.setEnemyHp(worldPlayer.getHp() * 5);
             worldEnemy.setBaseDamage((worldPlayer.getAtk() + 50));
@@ -341,18 +375,20 @@ public class worldGeneration {
 
         //Miniboss
         if (localEncounterNumber == 11) {
-            System.out.println("Add Guy");
+            System.out.println("You see a massive man, weilding a posion laced broadsword approach you.");
+            System.out.println("AYYY KHOTUN! LET JINZOU THE DRUNKARD TAKE YOU ON!");
             System.out.println("Let the battle begin.\n");
-            worldEnemy.setEnemyHp(worldPlayer.getHp() * 5);
-            worldEnemy.setBaseDamage((worldPlayer.getAtk() + 50));
+            worldEnemy.setEnemyHp(worldPlayer.getHp() * 7);
+            worldEnemy.setBaseDamage((worldPlayer.getAtk() + 75));
         }
 
         //Miniboss
         if (localEncounterNumber == 12) {
-            System.out.println("Add Guy");
+            System.out.println("You feel a presence watching you. Before you get a chance, you are hit by a shurkien from the trees.");
+            System.out.println("Slow as always Khotun. My next shuriken will pierce your soul.");
             System.out.println("Let the battle begin.\n");
-            worldEnemy.setEnemyHp(worldPlayer.getHp() * 5);
-            worldEnemy.setBaseDamage((worldPlayer.getAtk() + 50));
+            worldEnemy.setEnemyHp(worldPlayer.getHp() * 7);
+            worldEnemy.setBaseDamage((worldPlayer.getAtk() + 75));
         }
 
         if (localEncounterNumber == 13) {

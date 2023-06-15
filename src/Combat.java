@@ -23,8 +23,14 @@ public class Combat {
     }
 
     public void playerStatus() {
-        System.out.println("Current HP: " + combatPlayer.getHp());
-        System.out.println("Current Energy: " + combatPlayer.getEnergy());
+        String[] item1 = combatWorld.getItem1();
+
+        System.out.println("Current HP: " + (combatPlayer.getHp() + Double.parseDouble(item1[3])));
+        int currentHp = (int) (combatPlayer.getHp() + Double.parseDouble(item1[3]));
+        combatPlayer.setPlayerMaxHp(currentHp);
+        System.out.println("Current Energy: " + (combatPlayer.getEnergy() + Double.parseDouble(item1[4])));
+        int currentNRG = (int) (combatPlayer.getEnergy() + Double.parseDouble(item1[4]));
+        combatPlayer.setEnergy(currentNRG);
         System.out.println("Current Attack: " + combatPlayer.getAtk());
         System.out.println("Current Defense: " + combatPlayer.getDef());
         System.out.println("Current Level: " + combatPlayer.getLevel());
@@ -54,10 +60,13 @@ public class Combat {
     }
 
     public void Combat() {
+        String[] item1 = combatWorld.getItem1();
+        noFlee = true;
         while (combatPlayer.isAlive() && combatEnemy.isAlive() && noFlee) {
             playerStatus();
             if (Objects.equals(playerInput, "a")) {
-                playerAtk = combatPlayer.getAtk() + 100;
+
+                playerAtk = combatPlayer.getAtk() + 100 + Double.parseDouble(item1[1]);
                 enemyHp = combatEnemy.getEnemyHp() - playerAtk;
                 combatEnemy.setEnemyHp(enemyHp);
                 System.out.println("You did: " + playerAtk + " Damage!");
@@ -98,6 +107,7 @@ public class Combat {
     }
 
     public void specialMoves() {
+        String[] item1 = combatWorld.getItem1();
         combatPlayer.milestone();
         if (combatPlayer.getMilestone() >= 1) {
             System.out.println("SPECIAL MOVE #1: Heavenly STRIKE");
@@ -159,46 +169,51 @@ public class Combat {
            Combat();
         }
 
-        if (combatPlayer.getMilestone() >= 1 && specialInput == 1) {
-            playerAtk = combatPlayer.getAtk() + 125;
+        if (combatPlayer.getMilestone() >= 1 && specialInput == 1 && (combatPlayer.getEnergy() >= 50)) {
+            playerAtk = combatPlayer.getAtk() + 125 + Double.parseDouble(item1[5]);
             enemyHp = combatEnemy.getEnemyHp() - playerAtk;
             combatEnemy.setEnemyHp(enemyHp);
+            combatPlayer.setEnergy(combatPlayer.getEnergy() - 50);
             System.out.println("Damage Dealt: \n" + playerAtk);
         }
 
-        if (combatPlayer.getMilestone() >= 2 && specialInput == 2) {
-            playerAtk = combatPlayer.getAtk() + 150;
+        if (combatPlayer.getMilestone() >= 2 && specialInput == 2 && (combatPlayer.getEnergy() >= 100)) {
+            playerAtk = combatPlayer.getAtk() + 150 + Double.parseDouble(item1[5]);
             enemyHp = combatEnemy.getEnemyHp() - playerAtk;
             combatEnemy.setEnemyHp(enemyHp);
+            combatPlayer.setEnergy(combatPlayer.getEnergy() - 100);
             System.out.println("Damage Dealt: " + playerAtk);
             playerInput = null;
         }
 
-        if (combatPlayer.getMilestone() >= 3 && specialInput == 3) {
-            playerAtk = combatPlayer.getAtk() + 175;
+        if (combatPlayer.getMilestone() >= 3 && specialInput == 3 && (combatPlayer.getEnergy() >= 150)) {
+            playerAtk = combatPlayer.getAtk() + Double.parseDouble(item1[5]);
             enemyHp = combatEnemy.getEnemyHp() - playerAtk;
             combatEnemy.setEnemyHp(enemyHp);
+            combatPlayer.setEnergy(combatPlayer.getEnergy() - 150);
             System.out.println("Damage Dealt: " + playerAtk);
             playerInput = null;
         }
 
-        if (combatPlayer.getMilestone() >= 4 && specialInput == 4) {
-            playerAtk = combatPlayer.getAtk() + 200;
+        if (combatPlayer.getMilestone() >= 4 && specialInput == 4 && (combatPlayer.getEnergy() >= 200)) {
+            playerAtk = combatPlayer.getAtk() + Double.parseDouble(item1[5]);
             enemyHp = combatEnemy.getEnemyHp() - playerAtk;
             combatEnemy.setEnemyHp(enemyHp);
+            combatPlayer.setEnergy(combatPlayer.getEnergy() - 200);
             System.out.println("Damage Dealt: " + playerAtk);
             playerInput = null;
         }
 
-        if (combatPlayer.getMilestone() >= 5 && specialInput == 5) {
+        if (combatPlayer.getMilestone() >= 5 && specialInput == 5 && (combatPlayer.getEnergy() >= 250)) {
             combatPlayer.setHp(combatPlayer.getHp() * 2);
             combatPlayer.setEnergy(combatPlayer.getEnergy() * 2);
+            combatPlayer.setEnergy(combatPlayer.getEnergy() - 250);
             combatPlayer.setPlayerMaxHp(combatPlayer.getPlayerMaxHp() - 25);
             System.out.println("You feel empowered...");
             playerInput = null;
         }
 
-        if (combatPlayer.getMilestone() >= 6 && specialInput == 6) {
+        if (combatPlayer.getMilestone() >= 6 && specialInput == 6 && (combatPlayer.getEnergy() >= 300)) {
             int choice = (int) (Math.random() * 2 + 0);
             if (choice == 1) {
                 combatEnemy.setEnemyHp(-1);
@@ -207,6 +222,7 @@ public class Combat {
                 combatPlayer.setHp((combatPlayer.getHp() / 2));
                 System.out.println("The Gambit has failed...");
             }
+            combatPlayer.setEnergy(combatPlayer.getEnergy() - 300);
             playerInput = null;
         }
 
@@ -226,22 +242,28 @@ public class Combat {
     public void Inventory() {
         //TODO fix null printing for no items
         System.out.println("Here is currently the items you have!");
+        String[]None = {"None", "None", "None", "None", "None", "None", "None"};
+
+
         String[] item1 = combatWorld.getItem1().clone();
-        String[] item2 = combatWorld.getItem2().clone();
+        /*
+        String[] item2 = combatWorld.getItem1().clone();
         String[] item3 = combatWorld.getItem3().clone();
         String[] item4 = combatWorld.getItem4().clone();
         String[] item5 = combatWorld.getItem5().clone();
+         */
 
         System.out.println();
         System.out.println("Item #1");
-        System.out.println("Name" + item1[0]);
-        System.out.println("Attack Power Boost" + item1[1]);
-        System.out.println("Defense Power Boost" + item1[2]);
-        System.out.println("Health Boost" + item1[3]);
-        System.out.println("Energy Boost" + item1[4]);
-        System.out.println("Special Power Boost" + item1[5]);
+        System.out.println("Name: " + item1[0]);
+        System.out.println("Attack Power Boost: " + item1[1]);
+        System.out.println("Defense Power Boost: " + item1[2]);
+        System.out.println("Health Boost: " + item1[3]);
+        System.out.println("Energy Boost: " + item1[4]);
+        System.out.println("Special Power Boost: " + item1[5]);
         System.out.println();
 
+        /*
         System.out.println();
         System.out.println("Item #2");
         System.out.println("Name" + item2[0]);
@@ -281,6 +303,7 @@ public class Combat {
         System.out.println("Energy Boost" + item5[4]);
         System.out.println("Special Power Boost" + item5[5]);
         System.out.println();
+         */
     }
 
     /*
@@ -298,10 +321,12 @@ public class Combat {
 
 
     public void Defend() {
-        playerDef = combatPlayer.getDef() / 100;
+        String[] item1 = combatWorld.getItem1();
+
+        playerDef = ((combatPlayer.getDef() + Double.parseDouble(item1[2])) / 100);
         playerHp = (combatPlayer.getHp() - (combatEnemy.getbaseDamage() - (combatEnemy.getbaseDamage() * playerDef)));
         combatPlayer.setHp(playerHp);
-        System.out.println("You Took: " + combatEnemy.getbaseDamage() + " Damage!");
+        System.out.println("You Took: " + combatEnemy.getbaseDamage() + " damage from your defense stance!");
     }
 
     public void Flee() {

@@ -27,9 +27,29 @@ class GhostofKhotunKhan2 {
         worldGeneration world = new worldGeneration(player, enemy, main);
         Combat combat = new Combat(enemy, player, main, world);
 
+        System.out.println("Welcome to the Ghost of Khotun Khan 2 Beta!");
 
-        //player.setPlayerLevel(12);
+        System.out.println("In this Beta, we will be highlighting the Shop, Combat and Encounter Systems.");
+
+        System.out.println("Firstly, Lets get you setup with an item. I've given you 9999 Coins, so go crazy!");
+        player.setCoins(9999);
+        world.setValidItemPool();
+        world.newShop();
+        System.out.println();
+        System.out.println();
+
+        System.out.println("Now, Lets fight! Try out this combat encounter against a normal enemy!");
         world.encounterMessage(1);
+        combat.Combat();
+
+        System.out.println("Now, lets try for something a little harder! A mini boss is coming your way! I've powered you up with some new moves!");
+        System.out.println();
+        System.out.println();
+        player.setEnergy(9999);
+        player.setPlayerLevel(12);
+
+
+        world.encounterMessage(2);
         combat.Combat();
 
 
