@@ -7,6 +7,8 @@ TODO
  */
 
 import java.util.*;
+import java.util.Random;
+
 
 //Text Based Adventure game set in Mongolia Post Japanese Invasion
 //Ghost Of Khotun Khan Version: 1.2
@@ -31,7 +33,7 @@ class GhostofKhotunKhan2 {
 
         System.out.println("In this Beta, we will be highlighting the Shop, Combat and Encounter Systems.");
 
-        System.out.println("Firstly, Lets get you setup with an item. I've given you 9999 Coins, so go crazy!");
+        System.out.println("Firstly, Lets get you set up with an item. I've given you 9999 Coins, so go crazy!");
         player.setCoins(9999);
         world.setValidItemPool();
         world.newShop();
@@ -51,7 +53,6 @@ class GhostofKhotunKhan2 {
 
         world.encounterMessage(2);
         combat.Combat();
-
 
         /*
         //Calls title screen
@@ -445,7 +446,7 @@ class GhostofKhotunKhan2 {
             System.out.println("SPECIAL THANKS: INTELLIJ IDEA COMMUNITY EDTION\n");
             System.out.println("PUBLISHING/CLASS CODE: [REDACTED] \n");
             System.out.println("The program will exit in 30 seconds.");
-            System.out.println("dfdfdf");
+
 
 
             tempStop(30);

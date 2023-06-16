@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 
 class Player {
     public String test;
@@ -11,10 +11,12 @@ class Player {
 
     public Player() {
         playerMaxHp = 100;
+        playerMaxEnergy = 50;
         playerHp = 100;
+        playerEnergy = 50;
         playerLevel = 0;
-        playerDef = 5;
-        playerAtk = 5;
+        playerDef = 1;
+        playerAtk = 1;
         score = 100;
     }
 
@@ -22,10 +24,16 @@ class Player {
     //Levels the player, resets their HP and adds attack and defense power
     //also calls milestone to check if they have unlocked a new move on the level up
     public void encounterSurvived(boolean didSurvive) {
+        int gainedMoney;
         if (didSurvive) {
             System.out.println("You live to see another day.");
             System.out.println("Congrats, you leveled up!");
+            gainedMoney = (int) (Math.random() * (500 - 10 + 1)) + 10 ;
+            System.out.println(gainedMoney);
+            coins = coins + gainedMoney;
+            System.out.println("You also gain " + gainedMoney + " coins from the enemy!");
             playerHp = playerMaxHp;
+            playerEnergy = playerMaxEnergy;
             playerLevel = playerLevel + 1;
             System.out.println("Select what you want to level up!");
             System.out.println();
@@ -91,15 +99,14 @@ class Player {
         coins = money;
     }
 
-    public int getCoins() {
-        System.out.println(coins);
-        return coins;
-    }
+    public int getCoins() {return coins;}
 
     public int getPlayerMaxHp() {
         return playerMaxHp;
     }
-
+    public int getPlayerMaxNRG() {
+        return playerMaxEnergy;
+    }
     public int getEnergy() {
         return playerEnergy;
     }
@@ -118,6 +125,7 @@ class Player {
     {
         playerMaxHp = maxhp;
     }
+    public  void setPlayerMaxNRG(int maxnrg) {playerMaxEnergy = maxnrg;}
 
     //gets the players level when called
     public int getLevel() {
@@ -166,7 +174,6 @@ class Player {
     //variable as suited. This is then used for various different things
     //such as special moves, story settings & score system
     public void milestone() {
-        System.out.println(playerLevel);
         if (playerLevel == 2) {
             System.out.println("You've unlocked Heavenly JUSTICE!");
             System.out.println("Use this special move to channel the might of the gods in your blade!");

@@ -345,32 +345,32 @@ public class worldGeneration {
         if (localEncounterNumber == 6) {
             System.out.println("The ground rumbles around you. Its a massive earthworm emerges!");
             System.out.println("Let the battle begin.\n");
-            worldEnemy.setEnemyHp(worldPlayer.getHp() * 5);
-            worldEnemy.setBaseDamage((worldPlayer.getAtk() + 50));
+            worldEnemy.setEnemyHp(worldPlayer.getHp() * 3);
+            worldEnemy.setBaseDamage((worldPlayer.getAtk() + 25) / 2);
         }
         if (localEncounterNumber == 7) {
             System.out.println("");
             System.out.println("Let the battle begin.\n");
-            worldEnemy.setEnemyHp(worldPlayer.getHp() * 5);
-            worldEnemy.setBaseDamage((worldPlayer.getAtk() + 50));
+            worldEnemy.setEnemyHp(worldPlayer.getHp() * 3);
+            worldEnemy.setBaseDamage((worldPlayer.getAtk() + 25) / 2);
         }
         if (localEncounterNumber == 8) {
             System.out.println("Add Guy");
             System.out.println("Let the battle begin.\n");
-            worldEnemy.setEnemyHp(worldPlayer.getHp() * 5);
-            worldEnemy.setBaseDamage((worldPlayer.getAtk() + 50));
+            worldEnemy.setEnemyHp(worldPlayer.getHp() * 3);
+            worldEnemy.setBaseDamage((worldPlayer.getAtk() + 25) / 2);
         }
         if (localEncounterNumber == 9) {
             System.out.println("Add Guy");
             System.out.println("Let the battle begin.\n");
-            worldEnemy.setEnemyHp(worldPlayer.getHp() * 5);
-            worldEnemy.setBaseDamage((worldPlayer.getAtk() + 50));
+            worldEnemy.setEnemyHp(worldPlayer.getHp() * 3);
+            worldEnemy.setBaseDamage((worldPlayer.getAtk() + 25) / 2);
         }
         if (localEncounterNumber == 10) {
             System.out.println("Add Guy");
             System.out.println("Let the battle begin.\n");
-            worldEnemy.setEnemyHp(worldPlayer.getHp() * 5);
-            worldEnemy.setBaseDamage((worldPlayer.getAtk() + 50));
+            worldEnemy.setEnemyHp(worldPlayer.getHp() * 3);
+            worldEnemy.setBaseDamage((worldPlayer.getAtk() + 25) / 2);
         }
 
         //Miniboss

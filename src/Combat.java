@@ -14,6 +14,7 @@ public class Combat {
     private String playerInput;
 
     boolean noFlee = true;
+    boolean noGambit = true;
 
     public Combat(Enemy enemy, Player player, GhostofKhotunKhan2 main, worldGeneration world) {
         combatPlayer = player;
@@ -30,10 +31,11 @@ public class Combat {
         combatPlayer.setPlayerMaxHp(currentHp);
         System.out.println("Current Energy: " + (combatPlayer.getEnergy() + Double.parseDouble(item1[4])));
         int currentNRG = (int) (combatPlayer.getEnergy() + Double.parseDouble(item1[4]));
-        combatPlayer.setEnergy(currentNRG);
+        combatPlayer.setPlayerMaxNRG(currentNRG);
         System.out.println("Current Attack: " + combatPlayer.getAtk());
         System.out.println("Current Defense: " + combatPlayer.getDef());
         System.out.println("Current Level: " + combatPlayer.getLevel());
+        System.out.println("Current Coin Count: " + combatPlayer.getCoins());
         System.out.println("What will you do? Enter A to Attack, D to Defend, S to see special moves!\n");
         System.out.println("You can also use X to flee!");
         Scanner CombatInput = new Scanner(System.in);
@@ -84,9 +86,10 @@ public class Combat {
             if (Objects.equals(playerInput, "i")) {
                 Inventory();
             }
-
-            enemyAttack();
-
+            if(noGambit)
+            {
+                enemyAttack();
+            }
         }
         resultantCheck();
     }
@@ -218,6 +221,7 @@ public class Combat {
             if (choice == 1) {
                 combatEnemy.setEnemyHp(-1);
                 System.out.println("You got lucky.");
+                noGambit = false;
             } else {
                 combatPlayer.setHp((combatPlayer.getHp() / 2));
                 System.out.println("The Gambit has failed...");
