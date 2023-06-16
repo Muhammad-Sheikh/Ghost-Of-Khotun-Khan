@@ -96,7 +96,6 @@ public class worldGeneration {
 
         worldGeneration armour1 = new worldGeneration(worldPlayer, worldEnemy, worldMain);
         worldGeneration armour2 = new worldGeneration(worldPlayer, worldEnemy, worldMain);
-
         worldGeneration charm1 = new worldGeneration(worldPlayer, worldEnemy, worldMain);
         worldGeneration charm2 = new worldGeneration(worldPlayer, worldEnemy, worldMain);
         worldGeneration charm3 = new worldGeneration(worldPlayer, worldEnemy, worldMain);

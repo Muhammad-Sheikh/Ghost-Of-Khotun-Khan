@@ -10,11 +10,53 @@ public class Combat {
     private worldGeneration combatWorld;
 
     private double enemyHp, enemyDef, enemyChoice, playerAtk, playerHp, playerDef;
-
+    String[] item1, item2, item3, item4, item5;
     private String playerInput;
 
     boolean noFlee = true;
     boolean noGambit = true;
+
+    public void itemSet()
+    {
+        String[] blankItem = {"None", "None", "None", "None", "None", "None", "None"};
+        
+        if(combatWorld.getItem1() == null)
+        {
+            item1= blankItem.clone();
+        } else {
+            item1 = combatWorld.getItem1();
+        }
+
+        if(combatWorld.getItem2() == null)
+        {
+            item2 = blankItem.clone();
+        } else {
+            item2 = combatWorld.getItem2();
+        }
+
+        if(combatWorld.getItem3() == null)
+        {
+            item3 = blankItem.clone();
+        } else {
+            item3 = combatWorld.getItem3();
+        }
+
+        if(combatWorld.getItem4() == null)
+        {
+            item4 = blankItem.clone();
+        } else {
+            item4 = combatWorld.getItem4();
+        }
+
+        if(combatWorld.getItem5() == null)
+        {
+            item5 = blankItem.clone();
+        } else {
+            item5 = combatWorld.getItem5();
+        }
+        
+        
+    }
 
     public Combat(Enemy enemy, Player player, GhostofKhotunKhan2 main, worldGeneration world) {
         combatPlayer = player;
@@ -24,8 +66,7 @@ public class Combat {
     }
 
     public void playerStatus() {
-        String[] item1 = combatWorld.getItem1();
-
+        itemSet();
         System.out.println("Current HP: " + (combatPlayer.getHp() + Double.parseDouble(item1[3])));
         int currentHp = (int) (combatPlayer.getHp() + Double.parseDouble(item1[3]));
         combatPlayer.setPlayerMaxHp(currentHp);
@@ -36,7 +77,7 @@ public class Combat {
         System.out.println("Current Defense: " + combatPlayer.getDef());
         System.out.println("Current Level: " + combatPlayer.getLevel());
         System.out.println("Current Coin Count: " + combatPlayer.getCoins());
-        System.out.println("What will you do? Enter A to Attack, D to Defend, S to see special moves!\n");
+        System.out.println("What will you do? Enter A to Attack, D to Defend, S to see special moves, and I to check your items!!\n");
         System.out.println("You can also use X to flee!");
         Scanner CombatInput = new Scanner(System.in);
         playerInput = CombatInput.nextLine();
@@ -62,7 +103,7 @@ public class Combat {
     }
 
     public void Combat() {
-        String[] item1 = combatWorld.getItem1();
+        itemSet();
         noFlee = true;
         while (combatPlayer.isAlive() && combatEnemy.isAlive() && noFlee) {
             playerStatus();
@@ -244,18 +285,7 @@ public class Combat {
     }
 
     public void Inventory() {
-        //TODO fix null printing for no items
-        System.out.println("Here is currently the items you have!");
-        String[]None = {"None", "None", "None", "None", "None", "None", "None"};
-
-
-        String[] item1 = combatWorld.getItem1().clone();
-        /*
-        String[] item2 = combatWorld.getItem1().clone();
-        String[] item3 = combatWorld.getItem3().clone();
-        String[] item4 = combatWorld.getItem4().clone();
-        String[] item5 = combatWorld.getItem5().clone();
-         */
+        itemSet();
 
         System.out.println();
         System.out.println("Item #1");
@@ -267,47 +297,47 @@ public class Combat {
         System.out.println("Special Power Boost: " + item1[5]);
         System.out.println();
 
-        /*
+
         System.out.println();
         System.out.println("Item #2");
-        System.out.println("Name" + item2[0]);
-        System.out.println("Attack Power Boost" + item2[1]);
-        System.out.println("Defense Power Boost" + item2[2]);
-        System.out.println("Health Boost" + item2[3]);
-        System.out.println("Energy Boost" + item2[4]);
-        System.out.println("Special Power Boost" + item2[5]);
+        System.out.println("Name: " + item2[0]);
+        System.out.println("Attack Power Boost: " + item2[1]);
+        System.out.println("Defense Power Boost: " + item2[2]);
+        System.out.println("Health Boost: " + item2[3]);
+        System.out.println("Energy Boost: " + item2[4]);
+        System.out.println("Special Power Boost: " + item2[5]);
         System.out.println();
 
         System.out.println();
-        System.out.println("Item #1");
-        System.out.println("Name" + item3[0]);
-        System.out.println("Attack Power Boost" + item3[1]);
-        System.out.println("Defense Power Boost" + item3[2]);
-        System.out.println("Health Boost" + item3[3]);
-        System.out.println("Energy Boost" + item3[4]);
-        System.out.println("Special Power Boost" + item3[5]);
+        System.out.println("Item #3");
+        System.out.println("Name: " + item3[0]);
+        System.out.println("Attack Power Boost: " + item3[1]);
+        System.out.println("Defense Power Boost: " + item3[2]);
+        System.out.println("Health Boost: " + item3[3]);
+        System.out.println("Energy Boost: " + item3[4]);
+        System.out.println("Special Power Boost: " + item3[5]);
         System.out.println();
 
         System.out.println();
-        System.out.println("Item #1");
-        System.out.println("Name" + item4[0]);
-        System.out.println("Attack Power Boost" + item4[1]);
-        System.out.println("Defense Power Boost" + item4[2]);
-        System.out.println("Health Boost" + item4[3]);
-        System.out.println("Energy Boost" + item4[4]);
-        System.out.println("Special Power Boost" + item4[5]);
+        System.out.println("Item #4");
+        System.out.println("Name: " + item4[0]);
+        System.out.println("Attack Power Boost: " + item4[1]);
+        System.out.println("Defense Power Boost: " + item4[2]);
+        System.out.println("Health Boost: " + item4[3]);
+        System.out.println("Energy Boost: " + item4[4]);
+        System.out.println("Special Power Boost: " + item4[5]);
         System.out.println();
 
         System.out.println();
-        System.out.println("Item #1");
-        System.out.println("Name" + item5[0]);
-        System.out.println("Attack Power Boost" + item5[1]);
-        System.out.println("Defense Power Boost" + item5[2]);
-        System.out.println("Health Boost" + item5[3]);
-        System.out.println("Energy Boost" + item5[4]);
-        System.out.println("Special Power Boost" + item5[5]);
+        System.out.println("Item #5");
+        System.out.println("Name: " + item5[0]);
+        System.out.println("Attack Power Boost: " + item5[1]);
+        System.out.println("Defense Power Boost: " + item5[2]);
+        System.out.println("Health Boost: " + item5[3]);
+        System.out.println("Energy Boost: " + item5[4]);
+        System.out.println("Special Power Boost: " + item5[5]);
         System.out.println();
-         */
+
     }
 
     /*

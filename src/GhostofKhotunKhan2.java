@@ -36,15 +36,18 @@ class GhostofKhotunKhan2 {
         System.out.println("Firstly, Lets get you set up with an item. I've given you 9999 Coins, so go crazy!");
         player.setCoins(9999);
         world.setValidItemPool();
+        main.tempStop(2);
         world.newShop();
         System.out.println();
         System.out.println();
 
         System.out.println("Now, Lets fight! Try out this combat encounter against a normal enemy!");
+        main.tempStop(2);
         world.encounterMessage(1);
         combat.Combat();
 
         System.out.println("Now, lets try for something a little harder! A mini boss is coming your way! I've powered you up with some new moves!");
+        main.tempStop(2);
         System.out.println();
         System.out.println();
         player.setEnergy(9999);
