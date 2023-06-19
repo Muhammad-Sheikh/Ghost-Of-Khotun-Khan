@@ -1,5 +1,5 @@
 class Enemy {
-    //variable declaration
+    //variable declaration for enemies
     private double enemyDef, enemyHp, baseDamage;
 
     //Variable initialization
@@ -12,7 +12,6 @@ class Enemy {
     public boolean isAlive() {
         return enemyHp > 0;
     }
-
 
     //returns the enemy's defense
     public double getEnemyDef() {

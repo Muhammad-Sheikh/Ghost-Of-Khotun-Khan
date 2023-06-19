@@ -1,14 +1,13 @@
 import java.util.*;
 
 class Player {
-    public String test;
     //Variable Declaration
-    private int playerMaxHp, playerLevel, playerDef, playerAtk, score, milestoneProgress, playerEnergy, levelInput, playerMaxEnergy;
+    public String levelInput;
+    private int playerMaxHp, playerLevel, playerDef, playerAtk, score, milestoneProgress, playerEnergy, playerMaxEnergy;
     private double playerHp;
     int coins;
-    //Variable
 
-
+    //Variable Initialization
     public Player() {
         playerMaxHp = 100;
         playerMaxEnergy = 50;
@@ -29,11 +28,8 @@ class Player {
             System.out.println("You live to see another day.");
             System.out.println("Congrats, you leveled up!");
             gainedMoney = (int) (Math.random() * (500 - 10 + 1)) + 10 ;
-            System.out.println(gainedMoney);
             coins = coins + gainedMoney;
             System.out.println("You also gain " + gainedMoney + " coins from the enemy!");
-            playerHp = playerMaxHp;
-            playerEnergy = playerMaxEnergy;
             playerLevel = playerLevel + 1;
             System.out.println("Select what you want to level up!");
             System.out.println();
@@ -46,40 +42,43 @@ class Player {
             System.out.println("#4 Energy get more Maximum Energy");
 
             Scanner sc = new Scanner(System.in);
-            levelInput = sc.nextInt();
+            levelInput = sc.nextLine();
 
-            int possibleInput[] = {1, 2, 3, 4};
+            String possibleInput[] = {"1", "2", "3", "4"};
 
             boolean validInput = false;
             while (!validInput) {
                 //Checks if the user has entered any option from 0-3, the only valid options
                 for (int i = 0; i <= 3; i++) {
-                    if (levelInput == possibleInput[i]) {
+                    if (Objects.equals(levelInput, possibleInput[i])) {
                         validInput = true;
                     }
                 }
                 if(!validInput) {
                     System.out.println("Please enter a valid input:");
-                    levelInput = sc.nextInt();
+                    levelInput = sc.nextLine();
                 }
             }
             
-            if(levelInput == 1)
+            if(levelInput.equals("1"))
             {
-                playerMaxHp = 15 * playerLevel + 100;
+                playerMaxHp = (15 * playerLevel) + 100;
             }
-            if(levelInput == 2)
+            if(levelInput.equals("2"))
             {
                 playerDef = 3 * playerLevel;
             }
-            if(levelInput == 3)
+            if(levelInput.equals("3"))
             {
                 playerAtk = 2 * playerLevel + 5;
             }
-            if(levelInput == 4)
+            if(levelInput.equals("4"))
             {
-                playerMaxEnergy = 15 * playerLevel + 100;
+                playerMaxEnergy = (15 * playerLevel) + 100;
             }
+
+            playerHp = playerMaxHp;
+            playerEnergy = playerMaxEnergy;
 
             milestone();
         }
@@ -94,37 +93,37 @@ class Player {
     public void setHp(double Hp) {
         playerHp = Hp;
     }
-
+    //Sets the players coins when called with an integer
     public void setCoins(int money) {
         coins = money;
     }
-
+    //Returns the players coins when called
     public int getCoins() {return coins;}
-
+    //Returns the players max health when called
     public int getPlayerMaxHp() {
         return playerMaxHp;
     }
+    //Returns the players max energy when called
     public int getPlayerMaxNRG() {
         return playerMaxEnergy;
     }
+    //Returns the players energy when called
     public int getEnergy() {
         return playerEnergy;
     }
-
+    //Sets the players energy with an int when called
     public void setEnergy(int NRG) {
         playerEnergy = NRG;
     }
 
-    public void setPlayerLevel(int lvl) {
-        playerLevel = lvl;
-    }
-
     //returns the players HP when called
     public double getHp() {return playerHp;}
+    //Sets the players max hp when called with an int
     public void setPlayerMaxHp(int maxhp)
     {
         playerMaxHp = maxhp;
     }
+    //Sets the players max energy when called with an int
     public  void setPlayerMaxNRG(int maxnrg) {playerMaxEnergy = maxnrg;}
 
     //gets the players level when called
@@ -132,17 +131,14 @@ class Player {
         return playerLevel;
     }
 
-    //Gets the players score when called
-    public int getScore() {
-        score = score * playerLevel + playerAtk;
-        return score;
-    }
-
     //gets the players defense when called
     public int getDef() {
         return playerDef;
     }
 
+    public void setDef(int d){playerDef = d;}
+    public void setPlayerLevel(int l){playerLevel = l;}
+    public void setAtk(int a){playerAtk = a;}
     //gets the players attack when called
     public int getAtk() {
         return playerAtk;
@@ -161,8 +157,7 @@ class Player {
         if (!isAlive()) {
             score = score * playerLevel + playerAtk;
             System.out.println("GAME OVER!");
-            System.out.println("With the death of Khotun, the bloodiest coup in mankind's history unfolds. If only, his blade was sharper.");
-            System.out.println("Your Final Score was: " + score);
+            System.out.println("With the death of Khotun, The Omen slaughtered the rest of Mongolia. If only, his blade was sharper.");
             System.out.println("The game will exit in 15 seconds!");
             //main.tempStop(15);
             System.exit(0);
@@ -174,7 +169,7 @@ class Player {
     //variable as suited. This is then used for various different things
     //such as special moves, story settings & score system
     public void milestone() {
-        if (playerLevel == 2) {
+        if (playerLevel == 1) {
             System.out.println("You've unlocked Heavenly JUSTICE!");
             System.out.println("Use this special move to channel the might of the gods in your blade!");
             milestoneProgress = 1;
